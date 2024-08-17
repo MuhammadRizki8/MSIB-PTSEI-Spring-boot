@@ -3,6 +3,7 @@ package com.msibptsei.demo.library.controller;
 import com.msibptsei.demo.library.entity.Proyek;
 import com.msibptsei.demo.library.service.ProyekService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,11 +41,9 @@ public class ProyekController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> deleteProyek(@PathVariable Long id) {
-    //     return proyekService.getProyekById(id).map(proyek -> {
-    //         proyekService.deleteProyek(id);
-    //         return ResponseEntity.ok().build();
-    //     }).orElse(ResponseEntity.notFound().build());
-    // }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProyek(@PathVariable Long id) {
+        proyekService.deleteProyek(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

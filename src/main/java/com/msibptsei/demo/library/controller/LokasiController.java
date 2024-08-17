@@ -3,6 +3,7 @@ package com.msibptsei.demo.library.controller;
 import com.msibptsei.demo.library.entity.Lokasi;
 import com.msibptsei.demo.library.service.LokasiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,11 +38,9 @@ public class LokasiController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> deleteLokasi(@PathVariable Long id) {
-    //     return lokasiService.getLokasiById(id).map(lokasi -> {
-    //         lokasiService.deleteLokasi(id);
-    //         return ResponseEntity.<Void>ok().build(); // Explicitly specify the type parameter <Void>
-    //     }).orElse(ResponseEntity.notFound().build());
-    // }    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLokasi(@PathVariable Long id) {
+        lokasiService.deleteLokasi(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+    }    
 }
