@@ -3,7 +3,6 @@ package com.msibptsei.demo.library.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Table(name = "proyek")
@@ -33,11 +32,8 @@ public class Proyek {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToMany
-    @JoinTable(
-        name = "proyek_lokasi",
-        joinColumns = @JoinColumn(name = "proyek_id"),
-        inverseJoinColumns = @JoinColumn(name = "lokasi_id")
-    )
-    private Set<Lokasi> lokasi;
+    @ManyToOne
+    @JoinColumn(name = "lokasi_id", nullable = false)
+    private Lokasi lokasi;
+
 }

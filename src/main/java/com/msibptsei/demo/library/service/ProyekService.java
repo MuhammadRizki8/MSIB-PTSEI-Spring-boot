@@ -14,6 +14,7 @@ public class ProyekService {
     @Autowired
     private ProyekRepository proyekRepository;
 
+
     public Proyek saveProyek(Proyek proyek) {
         return proyekRepository.save(proyek);
     }
