@@ -26,6 +26,13 @@ public class LokasiController {
         return lokasiService.getAllLokasi();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Lokasi> getLokasiById(@PathVariable Long id) {
+        return lokasiService.getLokasiById(id)
+                .map(lokasi -> ResponseEntity.ok(lokasi))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Lokasi> updateLokasi(@PathVariable Long id, @RequestBody Lokasi lokasiDetails) {
         return lokasiService.getLokasiById(id).map(lokasi -> {
@@ -37,6 +44,7 @@ public class LokasiController {
             return ResponseEntity.ok(updatedLokasi);
         }).orElse(ResponseEntity.notFound().build());
     }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLokasi(@PathVariable Long id) {

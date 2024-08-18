@@ -1,6 +1,7 @@
 package com.msibptsei.demo.library.controller;
 
 import com.msibptsei.demo.library.dto.ProyekDTO;
+import com.msibptsei.demo.library.entity.Lokasi;
 import com.msibptsei.demo.library.entity.Proyek;
 import com.msibptsei.demo.library.service.ProyekService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,14 @@ public class ProyekController {
     public List<Proyek> getAllProyek() {
         return proyekService.getAllProyek();
     }
-    
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Proyek> getProyekById(@PathVariable Long id) {
+        return proyekService.getProyekById(id)
+                .map(proyek -> ResponseEntity.ok(proyek))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ProyekDTO> updateProyek(@PathVariable Long id, @RequestBody Proyek proyekDetails) {
         return proyekService.getProyekById(id).map(proyek -> {
